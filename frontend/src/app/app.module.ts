@@ -7,6 +7,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { ContactComponent } from './contact/contact.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+        ReactiveFormsModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],
