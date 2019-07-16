@@ -4,7 +4,6 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 
-
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 // Support URL-encoded bodies
@@ -12,12 +11,23 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use((req, res,next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
+	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with')
+  next()
+})
+
+
+app.post('/contact', (req, res, next) => {
+  console.log(req.body)
+  res.json('toto')
+})
 
 
 
 // GET - Récupération de l'ensemble des données de ta table
 app.get('/artists', (req, res) => {
-
   // connection à la base de données, et sélection des employés
   connection.query('SELECT * from artists', (err, results) => {
     if (err) {
@@ -105,29 +115,14 @@ app.put('/artists/:id', (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 //GET (light) - Récupération de quelques champs spécifiques (id, names, dates, etc...)
-
 app.get('/artists/name', (req, res) => {
-
   // connection à la base de données, et sélection des employés
   connection.query('SELECT name from artists', (err, results) => {
-
     if (err) {
-
       // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
       res.status(500).send('Erreur lors de la récupération des noms');
     } else {
-
       // Si tout s'est bien passé, on envoie le résultat de la requête SQL en tant que JSON.
       res.json(results);
     }
