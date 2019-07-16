@@ -30,6 +30,91 @@ app.get('/artists', (req, res) => {
   });
 });
 
+
+//sauvegarde nouvelle entité (commande INSERT INTO)
+// écoute de l'url "/api/employees" avec le verbe POST
+app.post('/artists/name', (req, res) => {
+
+  // récupération des données envoyées
+  const formData = req.body;
+
+  // connexion à la base de données, et insertion de l'artiste
+  connection.query('INSERT INTO artists SET ?', formData, (err, results) => {
+
+    if (err) {
+      // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
+      console.log(err);
+      res.status(500).send("Erreur lors de la sauvegarde d'un artist");
+    } else {
+      // Si tout s'est bien passé, on envoie un statut "ok".
+      res.sendStatus(200);
+    }
+  });
+});
+
+
+// DELETE - Suppression d'une entité
+// écoute de l'url "/api/employees"
+app.delete('/artists/:id', (req, res) => {
+
+  // récupération des données envoyées
+  const id = req.params.id;
+
+  // connexion à la base de données, et suppression de l'employé
+  connection.query('DELETE FROM artists WHERE id = ?', [id], err => {
+
+    if (err) {
+      // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
+      console.log(err);
+      res.status(500).send("Erreur lors de la suppression d'un artiste");
+    } else {
+
+      // Si tout s'est bien passé, on envoie un statut "ok".
+      res.sendStatus(200);
+    }
+  });
+});
+
+
+
+//PUT - Modification d'une entité
+// écoute de l'url "/api/employees"
+app.put('/artists/:id', (req, res) => {
+
+  // récupération des données envoyées
+  const id = req.params.id;
+  const formData = req.body;
+
+  // connection à la base de données, et insertion de l'employé
+  connection.query('UPDATE artists SET ? WHERE id = ?', [formData, id], err => {
+
+    if (err) {
+      // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
+      console.log(err);
+      res.status(500).send("Erreur lors de la modification d'un artiste");
+    } else {
+
+      // Si tout s'est bien passé, on envoie un statut "ok".
+      res.sendStatus(200);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //GET (light) - Récupération de quelques champs spécifiques (id, names, dates, etc...)
 
 app.get('/artists/name', (req, res) => {
@@ -160,7 +245,7 @@ app.get('/api/movies/nameOrder', (req, res) => {
 
 //sauvegarde nouvelle entité (commande INSERT INTO)
 // écoute de l'url "/api/employees" avec le verbe POST
-app.post('/artists', (req, res) => {
+app.post('/artists/name', (req, res) => {
 
   // récupération des données envoyées
   const formData = req.body;
