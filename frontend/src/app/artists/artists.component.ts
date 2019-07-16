@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectionService } from '../connection.service';
 
 @Component({
   selector: 'app-artists',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private connection: ConnectionService) { }
+
+  artists = []
 
   ngOnInit() {
+    this.connection.getArtists().subscribe((data: any) => {
+      console.log(data)
+      this.artists = data
+    })
   }
 
 }

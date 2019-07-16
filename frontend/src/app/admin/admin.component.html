@@ -1,1 +1,55 @@
-<p>admin works!</p>
+<div>
+    Hey here it's the user component
+
+    <label>id</label>
+    <input type="text" name="id" [(ngModel)]="newArtist.id" />
+
+    <label>Firstname</label>
+    <input type="text" name="firstname" [(ngModel)]="newArtist.firstname" />
+
+    <label>Nickname</label>
+    <input type="text" name="nickname" [(ngModel)]="newArtist.nickname"  />
+
+    <label>talent</label>
+    <input type="text" name="talent" [(ngModel)]="newArtist.talent"  />
+
+    <button (click)="create()">Create</button>
+    <button (click)="update()">Update</button>
+
+    <table *ngIf="artists.length > 0">
+      <tr>
+        <td>ID</td>
+        <td>Firstname</td>
+        <td>Nickname</td>
+        <td>Talent</td>
+        <td>Show</td>
+        <td>Update</td>
+        <td>Delete</td>
+      </tr>
+      <tr *ngFor="let artist of artists">
+        <td>{{ artist.id }}</td>
+        <td>{{ artist.firstname }}</td>
+        <td></td>
+        <td></td>
+        <td>
+            <a [routerLink]="['show', artist.id]">
+            Show
+          </a>
+        </td>
+        <td>
+          <a [routerLink]="['update', artist.id]">
+            Update
+          </a>
+        </td>
+        <td>
+          <button (click)="deleteArtist(artist.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  
+    <p *ngIf="artists.length == 0">
+      No artist
+    </p>
+  </div>

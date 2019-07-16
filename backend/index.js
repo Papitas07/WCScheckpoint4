@@ -3,6 +3,7 @@ const express = require('express')
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -15,16 +16,43 @@ app.use((req, res,next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS')
   res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with')
+
   next()
 })
 
 
 app.post('/contact', (req, res, next) => {
-  console.log(req.body)
-  res.json('toto')
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+    port: 587,
+    tls: {
+       ciphers:'SSLv3'
+    },
+    auth: {
+           user: '',
+           pass: ''
+       }
+   });
+
+   const mailOptions = {
+    from: '', // sender address
+    to: '', // list of receivers
+    subject: 'Demande de contact', // Subject line
+    html: `
+      contact name : ${req.body.contactFormName}
+      contact email : ${req.body.contactFormEmail}
+      subject : ${req.body.contactFormSubjects}
+      message  : ${req.body.contactFormMessage}    
+    `// plain text body
+  };
+  transporter.sendMail(mailOptions, function (err, info) {
+    if(err)
+      res.json(err)
+    else
+      res.json('Email sent')
+  });
 })
-
-
 
 // GET - Récupération de l'ensemble des données de ta table
 app.get('/artists', (req, res) => {
@@ -42,22 +70,18 @@ app.get('/artists', (req, res) => {
 
 
 //sauvegarde nouvelle entité (commande INSERT INTO)
-// écoute de l'url "/api/employees" avec le verbe POST
-app.post('/artists/name', (req, res) => {
-
+app.post('/artists', (req, res) => {
   // récupération des données envoyées
   const formData = req.body;
-
   // connexion à la base de données, et insertion de l'artiste
   connection.query('INSERT INTO artists SET ?', formData, (err, results) => {
-
     if (err) {
       // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
       console.log(err);
       res.status(500).send("Erreur lors de la sauvegarde d'un artist");
     } else {
       // Si tout s'est bien passé, on envoie un statut "ok".
-      res.sendStatus(200);
+      res.json(results);
     }
   });
 });
@@ -66,21 +90,17 @@ app.post('/artists/name', (req, res) => {
 // DELETE - Suppression d'une entité
 // écoute de l'url "/api/employees"
 app.delete('/artists/:id', (req, res) => {
-
   // récupération des données envoyées
   const id = req.params.id;
-
   // connexion à la base de données, et suppression de l'employé
   connection.query('DELETE FROM artists WHERE id = ?', [id], err => {
-
     if (err) {
       // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
       console.log(err);
       res.status(500).send("Erreur lors de la suppression d'un artiste");
     } else {
-
       // Si tout s'est bien passé, on envoie un statut "ok".
-      res.sendStatus(200);
+      res.json(results);
     }
   });
 });
@@ -88,28 +108,55 @@ app.delete('/artists/:id', (req, res) => {
 
 
 //PUT - Modification d'une entité
-// écoute de l'url "/api/employees"
 app.put('/artists/:id', (req, res) => {
-
   // récupération des données envoyées
   const id = req.params.id;
   const formData = req.body;
-
   // connection à la base de données, et insertion de l'employé
   connection.query('UPDATE artists SET ? WHERE id = ?', [formData, id], err => {
-
     if (err) {
       // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
       console.log(err);
       res.status(500).send("Erreur lors de la modification d'un artiste");
     } else {
-
       // Si tout s'est bien passé, on envoie un statut "ok".
-      res.sendStatus(200);
+      res.json(results);
     }
   });
 });
 
+// ajoute un vote en mode bulletin
+app.post('/vote', (req, res, next) => {
+    // récupération des données envoyées
+    const formData = req.body;
+    // connexion à la base de données, et insertion de l'artiste
+    connection.query('INSERT INTO vote SET ?', formData, (err, results) => {
+      if (err) {
+        // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
+        console.log(err);
+        res.status(500).send("Erreur lors de la sauvegarde d'un artist");
+      } else {
+        // Si tout s'est bien passé, on envoie un statut "ok".
+        res.json(results);
+      }
+    });
+})
+
+// get tous les votes
+// formater en regroupant tous les votes
+app.get('/vote', (req, res, next) => {
+  connection.query('SELECT * from vote', (err, results) => {
+    if (err) {
+      // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
+      res.status(500).send('Erreur lors de la récupération des artists');
+    } else {
+      // Si tout s'est bien passé, on envoie le résultat de la requête SQL en tant que JSON.
+//rassembler/compter les votes pour chaque valeur
+      // 
+      res.json(results);
+    }
+  });
+})
 
 
 

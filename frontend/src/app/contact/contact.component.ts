@@ -25,7 +25,6 @@ export class ContactComponent implements OnInit {
       'contactFormEmail': ['', Validators.compose([Validators.required, Validators.email])],
       'contactFormSubjects': ['', Validators.required],
       'contactFormMessage': ['', Validators.required],
-      'contactFormCopy': [''],
       });
    }
 
@@ -44,11 +43,10 @@ export class ContactComponent implements OnInit {
 
   send() {
     this.connectionService.sendMessage(
-      { 
-        name: 'toto',
-        email: 'a',
-        message: 'pouet' 
-      }).subscribe( data => {
+      { name: 'Jean Bon',
+  email: 'jean@debayonne.fr',
+  subject: 'sandwich',
+  message: 'pouet' }).subscribe( data => {
         console.log(data)
       }, (error) => {
         console.log(error)

@@ -5,14 +5,38 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConnectionService {
-  url: string = 'http://localhost:3000/contact';
+  url: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
   sendMessage(messageContent: any) {
     return this.http.post(
-      this.url,
+      `${this.url}/contact`,
       messageContent
     );
+  }
+
+  getArtists() {
+    return this.http.get(`${this.url}/artists`)
+  }
+
+  deleteArtist(id) {
+    return this.http.delete(`${this.url}/artists/${id}`)
+  }
+
+  createArtist(artist) {
+    const art = artist
+    delete art.id
+    return this.http.post(
+      `${this.url}/artists`,
+      art
+    )
+  }
+
+  updateArtist(artist) {
+    return this.http.put(
+      `${this.url}/artists/${artist.id}`,
+      artist
+    ) 
   }
 }
