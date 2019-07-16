@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConnectionService {
-  url: string = 'http://localhost:4200/send';
+  url: string = 'http://localhost:3000/contact';
+
   constructor(private http: HttpClient) { }
 
   sendMessage(messageContent: any) {
-    return this.http.post(this.url,
-    JSON.stringify(messageContent),
-    { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), responseType: 'text' });
+    return this.http.post(
+      this.url,
+      messageContent
+    );
   }
-
 }

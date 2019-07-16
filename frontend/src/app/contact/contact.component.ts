@@ -14,9 +14,8 @@ export class ContactComponent implements OnInit {
   optionsSelect: Array<any>;
   
     @HostListener('input') oninput() {
-  
-    if (this.contactForm.valid) {
-      this.disabledSubmitButton = false;
+      if (this.contactForm.valid) {
+        this.disabledSubmitButton = false;
       }
     }
 
@@ -32,13 +31,27 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
   }
+
   onSubmit() {
-    this.connectionService.sendMessage(this.contactForm.value).subscribe(() => {
-      alert('Your message has been sent.');
+    this.connectionService.sendMessage(this.contactForm.value).subscribe((data) => {
+      console.log('Your message has been sent.');
       this.contactForm.reset();
       this.disabledSubmitButton = true;
     }, error => {
       console.log('Error', error);
     });
+  }
+
+  send() {
+    this.connectionService.sendMessage(
+      { 
+        name: 'toto',
+        email: 'a',
+        message: 'pouet' 
+      }).subscribe( data => {
+        console.log(data)
+      }, (error) => {
+        console.log(error)
+      })
   }
 }
