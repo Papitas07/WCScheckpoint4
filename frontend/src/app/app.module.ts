@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { VoteComponent } from './vote/vote.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VoteComponent } from './vote/vote.component';
     HomeComponent,
     NavbarComponent,
     ContactComponent,
-    VoteComponent
+    VoteComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
