@@ -1,46 +1,36 @@
-<div>
-    Hey here it's the user component
+<div class="container">
 
-    <label>id</label>
+  <h1 class="text-center mt-5">Compte administrateur</h1>
+
+    <label class="add">id</label>
     <input type="text" name="id" [(ngModel)]="newArtist.id" />
 
-    <label>Firstname</label>
+    <label class="add">Firstname</label>
     <input type="text" name="firstname" [(ngModel)]="newArtist.firstname" />
 
-    <label>Nickname</label>
+    <label class="add">Nickname</label>
     <input type="text" name="nickname" [(ngModel)]="newArtist.nickname"  />
 
-    <label>talent</label>
+    <label class="add">talent</label>
     <input type="text" name="talent" [(ngModel)]="newArtist.talent"  />
 
-    <button (click)="create()">Create</button>
+    <button class="mr-3 ml-3" (click)="create()">Create</button>
     <button (click)="update()">Update</button>
 
-    <table *ngIf="artists.length > 0">
+    <table class="mb-5 mt-5" *ngIf="artists.length > 0">
       <tr>
-        <td>ID</td>
-        <td>Firstname</td>
-        <td>Nickname</td>
-        <td>Talent</td>
-        <td>Show</td>
-        <td>Update</td>
-        <td>Delete</td>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Nickname</th>
+        <th>Talent</th>
+        
       </tr>
       <tr *ngFor="let artist of artists">
         <td>{{ artist.id }}</td>
         <td>{{ artist.firstname }}</td>
-        <td></td>
-        <td></td>
-        <td>
-            <a [routerLink]="['show', artist.id]">
-            Show
-          </a>
-        </td>
-        <td>
-          <a [routerLink]="['update', artist.id]">
-            Update
-          </a>
-        </td>
+        <td>{{ artist.nickname }}</td>
+        <td>{{ artist.talent }} </td>
+        
         <td>
           <button (click)="deleteArtist(artist.id)">
             Delete

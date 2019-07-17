@@ -1,42 +1,54 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<div class="container-fluid">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark" [containerInside]="false">
 
-    <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">WILD CIRCUS</a></mdb-navbar-brand>
+  <mdb-navbar-brand>
+    <a [routerLink]="['/home']" class="nav-link p-0 mr-5 ml-5" href="#">
+      <img src="assets/logo.png" class="rounded-circle z-depth-0" alt="avatar image" height="100">
+    </a>
+  </mdb-navbar-brand>
+  <!-- Collapsible content -->
+  <links>
+    <ul class="navbar-nav mr-5">
+      <li class="nav-item ">
+        <a [routerLink]="['/home']" class="nav-link waves-light home ml-5 mr-5" mdbWavesEffect>Home<span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/about']" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>About us</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/artists']" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>The wilders</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/vote']" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>Vote for your favorite Wilder!</a>
+      </li>
 
-    <!-- Collapsible content -->
-    <links>
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>About us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>Vote!</a>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+      <!-- Dropdown -->
+      <!--  <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                 Basic dropdown<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-                </div>
-            </li>
+              <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                <div class="divider dropdown-divider"></div>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+              </div>
+            </li> -->
 
-        </ul>
-        <!-- Links -->
-
-    </links>
-    <!-- Collapsible content -->
-
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a [routerLink]="['/admin']" class="dropdown-item" href="#">Compte admninistrateur</a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
 </mdb-navbar>
-<!--/.Navbar-->
+</div>
