@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteArtist(id) {
+  deleteArtist(id: number) {
     this.connection.deleteArtist(id).subscribe( (data) => {
       console.log(data)
       console.log('deleted')

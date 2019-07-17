@@ -14,7 +14,7 @@
             class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="['/about']" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>About us</a>
+        <a (click)="onAnchorClick()" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>About us</a>
       </li>
       <li class="nav-item">
         <a [routerLink]="['/artists']" class="nav-link waves-light ml-5 mr-5" mdbWavesEffect>The wilders</a>

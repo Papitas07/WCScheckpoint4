@@ -20,7 +20,7 @@ export class ConnectionService {
     return this.http.get(`${this.url}/artists`)
   }
 
-  deleteArtist(id) {
+  deleteArtist(id: number) {
     return this.http.delete(`${this.url}/artists/${id}`)
   }
 
