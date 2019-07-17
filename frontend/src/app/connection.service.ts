@@ -39,4 +39,11 @@ export class ConnectionService {
       artist
     ) 
   }
+
+/*   voteArtist(id){
+    return this.http.post(
+      `${this.url}/vote/${id}`,
+      artist
+    )
+  } */
 }

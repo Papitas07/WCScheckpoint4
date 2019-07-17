@@ -1,1 +1,8 @@
-<p>vote works!</p>
+<div class="container mt-5">
+    <div *ngFor="let artist of artists"> 
+        <input type="radio" name="vote" value="artist.id"> {{ artist.firstname }} alias {{ artist.nickname }} talent: {{ artist.talent }} <br>
+    </div>
+
+    <button (click)="voteArtist" class="mt-3">Vote</button>
+
+</div>

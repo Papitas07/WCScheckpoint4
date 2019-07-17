@@ -42,5 +42,9 @@ export class AdminComponent implements OnInit {
     this.connection.updateArtist(this.newArtist).subscribe( (data) => {
       console.log(data)
     })
-  }
+  } 
+
+ /*  vote() {
+    this.connection.voteArtist()
+  } */
 }
