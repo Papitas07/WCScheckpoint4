@@ -15,9 +15,12 @@
     <input type="text" name="talent" [(ngModel)]="newArtist.talent"  />
 
     <button class="mr-3 ml-3" (click)="create()" onclick="location.reload()">Create</button>
-    <button (click)="update()" onclick="location.reload()">Update</button>
-
-    <table class="mb-5 mt-5" *ngIf="artists.length > 0">
+    <button (click)="update()" value="Refresh Page" onClick="window.location.reload();" >Update</button>
+    
+    
+    
+    
+      <table class="mb-5 mt-5" *ngIf="artists.length > 0">
       <tr>
         <th>ID</th>
         <th>Firstname</th>
@@ -32,7 +35,7 @@
         <td>{{ artist.talent }} </td>
         
         <td>
-          <button (click)="deleteArtist(artist.id)" onclick="location.reload()">
+          <button (click)="deleteArtist(artist.id)">
             Delete
           </button>
         </td>

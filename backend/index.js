@@ -23,22 +23,22 @@ app.use((req, res,next) => {
 
 app.post('/contact', (req, res, next) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
+    host: "smtp.mailtrap.io",
     secureConnection: false,
     port: 587,
     tls: {
        ciphers:'SSLv3'
     },
-    auth: { //meme adresse que dans from l39
-           user: '',
-           pass: ''
+    auth: { //meme adresse que dans 'from' l39
+           user: 'b13fbd48111b7e',
+           pass: 'bd2a415cd12f82'
        }
    });
 
    const mailOptions = {
-    from: '', // sender address
-    to: '', // list of receivers
-    subject: 'Demande de contact', // Subject line
+    from: 'b13fbd48111b7e', // sender address
+    to: 'emilie.fernandez1@hotmail.com', // list of receivers
+    subject: 'Contact Wild Circus', // Subject line
     html: `
       contact name : ${req.body.contactFormName}
       contact email : ${req.body.contactFormEmail}
@@ -54,7 +54,7 @@ app.post('/contact', (req, res, next) => {
   });
 })
 
-// GET - Récupération de l'ensemble des données de ta table
+// GET - Récupération de l'ensemble des données de la table
 app.get('/artists', (req, res) => {
   // connection à la base de données, et sélection des employés
   connection.query('SELECT * from artists', (err, results) => {
@@ -93,7 +93,7 @@ app.delete('/artists/:id', (req, res) => {
   // récupération des données envoyées
   const id = req.params.id;
   // connexion à la base de données, et suppression de l'employé
-  connection.query('DELETE FROM artists WHERE id = ?', [id], err => {
+  connection.query('DELETE FROM artists WHERE id = ?', [id], (err, results) => {
     if (err) {
       // Si une erreur est survenue, alors on informe l'utilisateur de l'erreur
       console.log(err);
@@ -152,7 +152,7 @@ app.get('/vote', (req, res, next) => {
     } else {
       // Si tout s'est bien passé, on envoie le résultat de la requête SQL en tant que JSON.
 //rassembler/compter les votes pour chaque valeur
-      // 
+      
       res.json(results);
     }
   });
